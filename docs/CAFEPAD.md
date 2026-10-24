@@ -12,6 +12,8 @@ In this repository's **Actions** tab, enable workflows if GitHub asks, select **
 
 The initial bootstrap build on `main` may contain a `cafepad.patch` file. The workflow checks and applies it, commits the resulting source to `ipad-local-jit`, and builds that commit. Later builds use the committed source directly. No game or pairing data is uploaded.
 
+For an app-only test build, select **Build CafePad iPad IPA with released core** instead. It compiles the app and StikJIT framework, and reuses the unchanged Cemu runtime from EspressU v1.2. Both the original IPA and the runtime binary must match pinned SHA-256 checksums. `runtime-core-provenance.json` states which route produced the IPA. Use the full source build when changing core or bridge implementation files.
+
 To build on a Mac with full Xcode:
 
 ```sh
@@ -42,7 +44,7 @@ The crash workaround is pinned to community pack commit `975f3759d7837da5a374150
 
 After a device test, record the iPad model, OS build, app source commit, JIT status, game title/version, selected renderer, enabled workaround and the launch log from **Settings > Device report and logs**. Report title-screen behaviour and several minutes of actual play separately.
 
-The core and app build from public source with pinned submodules. The pinned StikJIT dependency includes a public prebuilt idevice static library; MoltenVK is also vendored. Build details record their hashes and tool versions. The procedure is rebuildable, with no claim of byte-identical output.
+The full build compiles the core and app from public source with pinned submodules; the app-only route reuses the released core as described above. The pinned StikJIT dependency includes a public prebuilt idevice static library; MoltenVK is also vendored. Build details record their hashes and tool versions. The procedure is rebuildable, with no claim of byte-identical output.
 
 ## Credits and licences
 

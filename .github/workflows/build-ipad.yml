@@ -81,6 +81,7 @@ jobs:
             build-ios/package/CafePad-unsigned.ipa
             build-ios/package/SHA256SUMS.txt
             build-ios/package/build-provenance.json
+            build-ios/package/runtime-core-provenance.json
             build-ios/package/BUILD-NOTES.txt
 
       - name: Upload build diagnostics

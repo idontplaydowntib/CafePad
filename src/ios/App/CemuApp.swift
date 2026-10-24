@@ -20,8 +20,8 @@ struct CemuApp: App {
         let info = Bundle.main.infoDictionary ?? [:]
         let version = info["CFBundleShortVersionString"] as? String ?? "?"
         let build = info["CFBundleVersion"] as? String ?? "?"
-        let release = info["EspressUReleaseCommit"] as? String ?? "unstamped"
-        let core = info["EspressUCoreFingerprint"] as? String ?? "unstamped"
+        let release = info["CafePadSourceCommit"] as? String ?? info["EspressUReleaseCommit"] as? String ?? "unstamped"
+        let core = info["CafePadCoreSHA256"] as? String ?? info["EspressUCoreFingerprint"] as? String ?? "unstamped"
         cemu_bridge_log_checkpoint("CafePad \(version) (build \(build)), based on EspressU; release \(release), core \(core)")
 
         cemu_bridge_log_checkpoint("CemuApp.init() reached")
