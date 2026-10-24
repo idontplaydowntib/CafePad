@@ -1,0 +1,93 @@
+name: Build CafePad iPad IPA
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ipad-local-jit]
+
+# Builds the checked-out source. The optional one-time bootstrap commits the
+# uploaded source patch to ipad-local-jit. It never signs or publishes releases.
+permissions:
+  contents: write
+
+concurrency:
+  group: cafepad-ipad-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: xcode-27
+    timeout-minutes: 330
+    env:
+      VCPKG_BINARY_SOURCES: 'clear'
+      HOMEBREW_NO_AUTO_UPDATE: '1'
+    steps:
+      - name: Check out this commit and its pinned submodules
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+          persist-credentials: true
+
+      - name: Prepare the CafePad source branch from the uploaded patch
+        if: hashFiles('cafepad.patch') != ''
+        shell: bash
+        run: |
+          set -euo pipefail
+          git apply --index --check -- cafepad.patch
+          git apply --index -- cafepad.patch
+          git rm -- cafepad.patch
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Prepare CafePad iPad app and local JIT build'
+          git push origin HEAD:refs/heads/ipad-local-jit
+
+      - name: Select shipping Xcode 27.0
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo xcode-select -s /Applications/Xcode_27.0.app/Contents/Developer
+          xcodebuild -version
+          test "$(xcrun --sdk iphoneos --show-sdk-version)" = '27.0'
+
+      - name: Install the build tools and Metal compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          brew install cmake ninja xcodegen pkg-config autoconf automake libtool
+          xcodebuild -downloadComponent MetalToolchain
+
+      - name: Compile the emulator and package the unsigned IPA
+        shell: bash
+        run: |
+          set -euo pipefail
+          # ZIP-based source transfers may lose executable file modes.
+          chmod +x ci/*.sh
+          bash ci/build-ipad.sh
+
+      - name: Verify the packaged IPA
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 ci/verify-ipa.py build-ios/package/CafePad-unsigned.ipa
+
+      - name: Upload the IPA, checksum and source provenance
+        uses: actions/upload-artifact@v4
+        with:
+          name: CafePad-iPad-unsigned-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            build-ios/package/CafePad-unsigned.ipa
+            build-ios/package/SHA256SUMS.txt
+            build-ios/package/build-provenance.json
+            build-ios/package/BUILD-NOTES.txt
+
+      - name: Upload build diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: CafePad-build-logs-${{ github.run_id }}
+          if-no-files-found: ignore
+          retention-days: 14
+          path: build-ios/logs/
