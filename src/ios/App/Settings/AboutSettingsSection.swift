@@ -15,7 +15,8 @@ struct AboutSettingsSection: View {
     var body: some View {
         Section {
             SettingsRow(label: "Version", value: Bundle.main.appVersionString, icon: "number")
-            SettingsRow(label: "Created by", value: "Amar", icon: "person.fill")
+            SettingsRow(label: "Fork", value: "CafePad", icon: "ipad")
+            SettingsRow(label: "EspressU by", value: "Amar", icon: "person.fill")
             Link(destination: URL(string: "https://github.com/EspressU/EspressU-Emu")!) {
                 Label("View on GitHub", systemImage: "arrow.up.right.square")
                     .font(.system(size: 15, weight: .semibold, design: .rounded))
@@ -31,7 +32,7 @@ struct AboutSettingsSection: View {
                     .font(.system(size: 15, weight: .semibold, design: .rounded))
             }
 
-            Text("EspressU is built on Cemu and based on [MuffinEMU](https://github.com/MuffinEMU/Muffin-EMU) by Void.")
+            Text("CafePad is based on EspressU by Amar, built on Cemu and based on [MuffinEMU](https://github.com/MuffinEMU/Muffin-EMU) by Void. The interface and local JIT integration come from these upstream projects.")
                 .font(.system(size: 12))
                 .foregroundColor(EspressUTheme.secondaryText)
 

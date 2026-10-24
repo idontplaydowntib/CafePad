@@ -448,7 +448,7 @@ extension EspressUSettingsView {
         ]
 
         let about: [SettingsItem] = [
-            SettingsItem(id: "sys.version", title: "Version", detail: "EspressU builds on Cemu.",
+            SettingsItem(id: "sys.version", title: "Version", detail: "CafePad, based on EspressU and Cemu.",
                          control: .info("\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0") (\(Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "0"))", nil)),
             SettingsItem(id: "sys.about", title: "About and licences", detail: "Credits and open-source licences.",
                          control: .link("", .about)),

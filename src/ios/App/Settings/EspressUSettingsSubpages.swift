@@ -496,8 +496,9 @@ extension EspressUSettingsView {
         let version = "\(info["CFBundleShortVersionString"] as? String ?? "0.0") (\(info["CFBundleVersion"] as? String ?? "0"))"
         return [
             SettingsGroup(id: "about", title: "", items: [
-                SettingsItem(id: "about.version", title: "Version", detail: "EspressU is built on Cemu.", control: .info(version, nil)),
-                SettingsItem(id: "about.by", title: "Created by", control: .info("Amar", nil)),
+                SettingsItem(id: "about.version", title: "Version", detail: "CafePad is based on EspressU, MuffinEMU by Void, and Cemu.", control: .info(version, nil)),
+                SettingsItem(id: "about.fork", title: "Fork", control: .info("CafePad", nil)),
+                SettingsItem(id: "about.by", title: "EspressU by", control: .info("Amar", nil)),
                 SettingsItem(id: "about.github", title: "View on GitHub", detail: nil,
                              control: .action("Open", destructive: false, confirm: false, run: {
                                  if let url = URL(string: "https://github.com/EspressU/EspressU-Emu") { UIApplication.shared.open(url) }

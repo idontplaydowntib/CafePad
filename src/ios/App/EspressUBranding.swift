@@ -11,7 +11,7 @@ struct EspressULogo: View {
             .scaledToFill()
             .frame(width: side, height: side)
             .clipShape(RoundedRectangle(cornerRadius: side * 0.225, style: .continuous))
-            .accessibilityLabel("EspressU")
+            .accessibilityLabel("CafePad")
     }
 }
 
@@ -35,7 +35,7 @@ struct EspressUIntroView: View {
                 VStack(spacing: side * 0.14) {
                     EspressULogo(side: side)
                         .shadow(color: .black.opacity(0.5), radius: side * 0.12, y: side * 0.05)
-                    Text("EspressU")
+                    Text("CafePad")
                         .font(.system(size: side * 0.2, weight: .heavy, design: .rounded))
                         .foregroundColor(.white)
                 }

@@ -3,16 +3,16 @@ name: EspressU
 options:
   bundleIdPrefix: com.am4rdev
   deploymentTarget:
-    iOS: '15.0'
+    iOS: '17.4'
   xcodeVersion: '15.0'
 
 settings:
   PRODUCT_NAME: EspressU
-  PRODUCT_BUNDLE_IDENTIFIER: com.am4rdev.EspressU
+  PRODUCT_BUNDLE_IDENTIFIER: org.cafepad.emulator
   SDKROOT: iphoneos
-  IPHONEOS_DEPLOYMENT_TARGET: '15.0'
+  IPHONEOS_DEPLOYMENT_TARGET: '17.4'
   CODE_SIGN_IDENTITY: iPhone Developer
-  CODE_SIGN_ENTITLEMENTS: Cemu.entitlements
+  CODE_SIGN_ENTITLEMENTS: Sideload.entitlements
   SWIFT_OBJC_BRIDGING_HEADER: Bridge/Cemu-Bridging-Header.h
   CLANG_ENABLE_MODULES: 'YES'
   HEADER_SEARCH_PATHS:
@@ -25,7 +25,7 @@ settings:
   ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
   MARKETING_VERSION: '1.2'
   CURRENT_PROJECT_VERSION: '1'
-  INFOPLIST_KEY_CFBundleDisplayName: EspressU
+  INFOPLIST_KEY_CFBundleDisplayName: CafePad
   INFOPLIST_KEY_UILaunchScreen_Generation: 'YES'
   INFOPLIST_KEY_UIApplicationSceneManifest_Generation: 'YES'
   INFOPLIST_KEY_UISupportedInterfaceOrientations: 'UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight'
@@ -34,7 +34,7 @@ settings:
   INFOPLIST_KEY_UIStatusBarHidden: 'YES'
   INFOPLIST_KEY_NSMicrophoneUsageDescription: 'EspressU uses the microphone only when a Wii U game asks for GamePad microphone input.'
   INFOPLIST_KEY_NSLocalNetworkUsageDescription: 'EspressU pairs with this device for its built-in JIT, and connects to game servers on your local network when you use a custom server hosted at home.'
-  INFOPLIST_KEY_NSHumanReadableCopyright: 'EspressU, built on Cemu'
+  INFOPLIST_KEY_NSHumanReadableCopyright: 'CafePad, based on EspressU and MuffinEMU by Void, built on Cemu'
 
 packages:
   EspressUTouchLab:
@@ -44,7 +44,7 @@ targets:
   EspressU:
     type: application
     platform: iOS
-    deploymentTarget: '15.0'
+    deploymentTarget: '17.4'
 
     sources:
       - path: App
@@ -111,7 +111,7 @@ targets:
     settings:
       base:
         PRODUCT_NAME: StikJITHelper
-        PRODUCT_BUNDLE_IDENTIFIER: com.am4rdev.EspressU.StikJITHelper
+        PRODUCT_BUNDLE_IDENTIFIER: org.cafepad.emulator.StikJITHelper
         INFOPLIST_FILE: StikJITHelper/Info.plist
         GENERATE_INFOPLIST_FILE: 'NO'
         CODE_SIGN_ENTITLEMENTS: ''

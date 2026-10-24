@@ -19,6 +19,13 @@ mkdir -p "$DATA_ROOT/resources"
 rsync -a --delete "$SRC_FONTS/" "$DATA_ROOT/resources/sharedFonts/"
 rsync -a --delete "$SRC_PROFILES/" "$DATA_ROOT/gameProfiles/"
 
+# CC0 community workaround. The app installs this pack on its first launch.
+SRC_FIX="$REPO_ROOT/bin/graphicPacks/CafePad_NSMBU_CrashFix"
+test -f "$SRC_FIX/rules.txt"
+test -f "$SRC_FIX/patch_CrashFix.asm"
+mkdir -p "$DATA_ROOT/graphicPacks"
+rsync -a --delete "$SRC_FIX/" "$DATA_ROOT/graphicPacks/CafePad_NSMBU_CrashFix/"
+
 rm -rf "$DEST/resources" "$DEST/gameProfiles"
 
 echo "copy-bundle-data.sh: $(find "$DATA_ROOT/resources/sharedFonts" -type f | wc -l | tr -d ' ') shared font(s), $(find "$DATA_ROOT/gameProfiles" -type f | wc -l | tr -d ' ') game profile(s) -> $DATA_ROOT"

@@ -1,3 +1,14 @@
+# CafePad
+
+Experimental Cemu-based iPad fork of EspressU and MuffinEMU by Void. First target: iPad 10th generation (A14), iPadOS 27.0, and New Super Mario Bros. U (USA). Gameplay on that device remains unverified.
+
+This fork adds a GitHub Actions IPA build, a separate app identifier, sideload settings, build provenance, and the official NSMBU title-screen workaround to the existing emulator, interface, and built-in local StikJIT.
+
+**[Build, install, and test CafePad](docs/CAFEPAD.md)**
+
+<details>
+<summary>Original EspressU project information and credits</summary>
+
 <p align="center">
   <img src="assets/icon.png" width="160" alt="EspressU icon">
 </p>
@@ -69,3 +80,5 @@ The result is an unsigned `EspressU.app`. Zip it into a `Payload` folder as an `
 [MPL-2.0](LICENSE.txt). EspressU is built on Cemu; the copyright notices in the source files stay in place. Libraries and their licenses are listed in [docs/docs/licenses.html](docs/docs/licenses.html) and in the app under Settings › About.
 
 Wii U is a trademark of Nintendo. EspressU is not affiliated with Nintendo.
+
+</details>
